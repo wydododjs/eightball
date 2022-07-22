@@ -1,0 +1,60 @@
+default:
+  tags:
+    - crance
+    - linux
+    - docker
+    - scanner
+  image: reg.crance.me/ftfyapj/fortify-sca:21.2.3-tools
+
+variables:
+  FORTIFY_BUILD_ID: "eightball"
+  SSC_APP_NAME: "eightball"
+  SSC_APP_VER_NAME: "1.0"
+
+  # SSC_TOKEN: "CIToken"
+  # SSC_URL: "SSC_URL"
+
+  # WORKER_AUTH_TOKEN: WORKER_AUTH_TOKEN
+  # CLIENT_AUTH_TOKEN: CLIENT_AUTH_TOKEN
+  # COM_FORTIFY_LICENSEFILE: /fortify/config/fortify.license
+  # FORTIFY_UPDATE_URL: SSC_URL
+
+stages:
+  - build
+  - fortify:translate
+  - fortify:scan
+  - fortify:upload
+
+build:
+  stage: build
+  script:
+    - javac EightBall.java
+
+fortify-localTranslate:
+  stage: fortify:translate
+  script: 
+    - sourceanalyzer -b "$FORTIFY_BUILD_ID" -project-root ".fortify" -debug -verbose -jdk 8 EightBall.java
+  artifacts:
+    paths:
+      - ".fortify"
+    expire_in: 1 week
+
+fortify-localScan:
+  stage: fortify:scan
+  script: 
+    - fortifyupdate -url "$FORTIFY_UPDATE_URL" -acceptKey -acceptSSLCertificate
+    - sourceanalyzer -b "$FORTIFY_BUILD_ID" -project-root ".fortify" -debug -verbose -scan -f "$FORTIFY_BUILD_ID.fpr"
+  artifacts:
+    paths:
+      - ".fortify"
+      - "*.fpr"
+    expire_in: 1 week
+
+fortify-upload:
+  stage: fortify:upload
+  script: 
+    - fortifyclient -url "$SSC_URL" -authtoken "$SSC_TOKEN" uploadFPR -file "$FORTIFY_BUILD_ID.fpr" -project "$SSC_APP_NAME" -version "$SSC_APP_VER_NAME"
+  artifacts:
+    paths:
+      - "*.fpr"
+    expire_in: 1 week
