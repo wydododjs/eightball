@@ -49,7 +49,7 @@ jobs:
         env:                                            
           SC_CONTROLLER_URL: http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/
           SSC_UPLOAD_TOKEN: 62495ea8-8601-46a1-8050-0bbb8084c4a9
-          APPLICATION: "eightball"
+          APPLICATION: "aplikasi1"
           VERSION: "1"
           BUILD_OPTS: "-bt none"
 
