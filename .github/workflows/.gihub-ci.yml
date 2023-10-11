@@ -36,20 +36,20 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v1   
         with:
-          version: 21.2.0                                      # On-prem customers should specify a client version that matches their ScanCentral environment
+          version: 22.2.0                                      # On-prem customers should specify a client version that matches their ScanCentral environment
                                                                # FoD customers usually should not specify a version but rather rely on the default version
-          client-auth-token: nuc4SPT!  # Optional, but required if ScanCentral Controller requires client authentication
+          client-auth-token: nuc4SPT  # Optional, but required if ScanCentral Controller requires client authentication
 
       ### Run Fortify ScanCentral Client ###
       # Update BUILD_OPTS based on the ScanCentral Client documentation and your project's included tech stack(s).
       #   ScanCentral Client will download dependencies for maven, gradle and msbuild projects.
       #   For other build tools, add your build commands to the workflow to download necessary dependencies and prepare according to Fortify SCA documentation.
       - name: Perform SAST Scan
-        run: scancentral -url http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/ start $BUILD_OPTS -upload -application aplikasi1 -version 1 -uptoken 62495ea8-8601-46a1-8050-0bbb8084c4a9 
+        run: scancentral -url http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/ start $BUILD_OPTS -upload -application eightball -version 1 -uptoken 8af0c7c0-653c-4ffb-a63f-a04f1e11d4c1
         env:                                            
           SC_CONTROLLER_URL: http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/
-          SSC_UPLOAD_TOKEN: 62495ea8-8601-46a1-8050-0bbb8084c4a9
-          APPLICATION: "aplikasi1"
+          SSC_UPLOAD_TOKEN: 8af0c7c0-653c-4ffb-a63f-a04f1e11d4c1
+          APPLICATION: "eightball"
           VERSION: "1"
           BUILD_OPTS: "-bt none"
 
