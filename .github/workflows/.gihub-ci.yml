@@ -36,7 +36,7 @@ jobs:
       - name: Download Fortify ScanCentral Client
         uses: fortify/gha-setup-scancentral-client@v1   
         with:
-          version: 22.2.0                                      # On-prem customers should specify a client version that matches their ScanCentral environment
+          version: 23.1.0                                      # On-prem customers should specify a client version that matches their ScanCentral environment
                                                                # FoD customers usually should not specify a version but rather rely on the default version
           client-auth-token: nuc4SPT  # Optional, but required if ScanCentral Controller requires client authentication
 
@@ -48,8 +48,8 @@ jobs:
         run: scancentral -url http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/ start $BUILD_OPTS -upload -application eightball -version 1 -uptoken 8af0c7c0-653c-4ffb-a63f-a04f1e11d4c1
         env:                                            
           SC_CONTROLLER_URL: http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/
-          SSC_UPLOAD_TOKEN: 8af0c7c0-653c-4ffb-a63f-a04f1e11d4c1
-          APPLICATION: "eightball"
+          SSC_UPLOAD_TOKEN: b8f28277-eca4-40dd-afa4-d0cf3c911288
+          APPLICATION: "8ball"
           VERSION: "1"
           BUILD_OPTS: "-bt none"
 
