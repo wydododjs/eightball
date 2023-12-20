@@ -67,5 +67,5 @@ jobs:
         env:
            SSC_URL: http://b8d00bd32ecb.sn.mynetname.net:8080/ssc
            SSC_TOKEN: b8f28277-eca4-40dd-afa4-d0cf3c911288
-           SSC_APPVERSION: bugzilla:1
+           SSC_APPVERSION: 8ball:3
           
