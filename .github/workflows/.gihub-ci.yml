@@ -45,12 +45,12 @@ jobs:
       #   ScanCentral Client will download dependencies for maven, gradle and msbuild projects.
       #   For other build tools, add your build commands to the workflow to download necessary dependencies and prepare according to Fortify SCA documentation.
       - name: Perform SAST Scan
-        run: scancentral -url http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/ start $BUILD_OPTS -upload -application 8ball -version 4 -uptoken b8f28277-eca4-40dd-afa4-d0cf3c911288
+        run: scancentral -url http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/ start $BUILD_OPTS -upload -application 8ball -version 6 -uptoken b8f28277-eca4-40dd-afa4-d0cf3c911288
         env:                                            
           SC_CONTROLLER_URL: http://b8d00bd32ecb.sn.mynetname.net:8080/scancentral-ctrl/
           SSC_UPLOAD_TOKEN: b8f28277-eca4-40dd-afa4-d0cf3c911288
           APPLICATION: "8ball"
-          VERSION: "4"
+          VERSION: "6"
           BUILD_OPTS: "-bt none"
 
       ### Archive ScanCentral Client logs on failure ###
@@ -67,5 +67,5 @@ jobs:
         env:
            SSC_URL: http://b8d00bd32ecb.sn.mynetname.net:8080/ssc
            SSC_TOKEN: b8f28277-eca4-40dd-afa4-d0cf3c911288
-           SSC_APPVERSION: 8ball:4
+           SSC_APPVERSION: 8ball:6
           
